@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "260917072566",
+    "project_id": "flutter-accounts",
+    "storage_bucket": "flutter-accounts.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260917072566:android:3f84d320c2ab7dd7b98c17",
+        "android_client_info": {
+          "package_name": "com.palpha.accounts_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJnTN9AF8y8NhCE-OUy8XsBuGs7zgXSxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
