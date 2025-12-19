@@ -11,8 +11,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currency = context.watch<SettingsCubit>().state.currency;
-
     return BlocBuilder<TransactionBloc, TransactionState>(
       builder: (context, state) {
         if (state.status == TransactionStatus.loading) {
@@ -36,15 +34,15 @@ class HomeScreen extends StatelessWidget {
                        const Text('Total Balance', style: TextStyle(fontSize: 16)),
                        const SizedBox(height: 8),
                        Text(
-                         NumberFormat.currency(symbol: currency).format(state.totalBalance),
+                         NumberFormat.currency(symbol: context.watch<SettingsCubit>().state.currency).format(state.totalBalance),
                          style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                        ),
                        const SizedBox(height: 20),
                        Row(
                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                          children: [
-                           _buildSummaryItem(context, 'Income', state.totalIncome, Colors.green, currency),
-                           _buildSummaryItem(context, 'Expense', state.totalExpense, Colors.red, currency),
+                           _buildSummaryItem(context, 'Income', state.totalIncome, Colors.green, context.watch<SettingsCubit>().state.currency),
+                           _buildSummaryItem(context, 'Expense', state.totalExpense, Colors.red, context.watch<SettingsCubit>().state.currency),
                          ],
                        )
                     ],
@@ -98,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                         title: Text(transaction.category),
                         subtitle: Text(DateFormat.yMMMd().format(transaction.date)),
                         trailing: Text(
-                          '${transaction.type == TransactionType.income ? '+' : '-'}${NumberFormat.currency(symbol: currency).format(transaction.amount)}',
+                          '${transaction.type == TransactionType.income ? '+' : '-'}${NumberFormat.currency(symbol: context.watch<SettingsCubit>().state.currency).format(transaction.amount)}',
                           style: TextStyle(
                             color: transaction.type == TransactionType.income ? Colors.green[700] : Colors.red[700],
                             fontWeight: FontWeight.bold,

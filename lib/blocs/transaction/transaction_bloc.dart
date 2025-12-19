@@ -60,6 +60,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     double expense = 0;
     print("TransactionBloc: Processing ${event.transactions.length} transactions");
     for (var t in event.transactions) {
+      print("  - ${t.type.toString()}: ${t.category} = ${t.amount}");
       if (t.type == TransactionType.income) {
         income += t.amount;
       } else {
@@ -67,14 +68,17 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       }
     }
     
+    final newBalance = income - expense;
+    print("TransactionBloc: Income=$income, Expense=$expense, Balance=$newBalance");
+    
     emit(state.copyWith(
       status: TransactionStatus.loaded,
       transactions: event.transactions,
       totalIncome: income,
       totalExpense: expense,
-      totalBalance: income - expense,
+      totalBalance: newBalance,
     ));
-    print("TransactionBloc: New Balance: ${income - expense}");
+    print("TransactionBloc: State emitted - Balance in state: ${state.totalBalance}");
   }
 
   @override
